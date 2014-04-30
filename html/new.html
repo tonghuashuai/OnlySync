@@ -1,0 +1,49 @@
+<%inherit file="base.html"/>
+<%block name="css">
+    <link rel="stylesheet" href="/static/css/new.css">
+    <link rel="stylesheet" href="/static/css/util/loading.css">
+</%block>
+
+<div class="item_container">
+    <div class="form-group">
+        <input type="text" class="form-control" id="url" placeholder="请输入淘宝二手连接">
+    </div>
+    <div class="form-group">
+        <div class="float-r">
+            <button type="button" id="btn_parse" class="btn btn-primary">获取信息</button>
+        </div>
+    </div>
+    <div class="clear"></div>
+    
+    <div id="loading">
+
+    </div>
+    <div id="detail">
+        <div class="form-group">
+            <label for="title" class="control-label">标题</label>
+            <div id="title"></div>
+            <!--<input type="text" class="form-control" id="title" placeholder="标题">-->
+        </div>
+        <div class="form-group">
+            <div id="price-container">
+                <label for="price" class="control-label">价格</label>
+                <div id="price"></div>
+                <!--<input type="text" class="form-control" id="price" placeholder="价格">-->
+            </div>
+        </div>
+        <div id="img_list" class="form-group">
+        </div>
+        <div class="form-group">
+            <label for="desc" class="control-label">描述</label>
+            <div id="desc"></div>
+            <!--<textarea id="desc" class="form-control" rows="3"></textarea>-->
+        </div>
+        <div class="form-group">
+            <label for="memo" class="control-label">吐槽 她/他</label>
+            <textarea id="memo" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+</div>
+<%block name="js">
+<script src="/static/js/new.js"></script>
+</%block>

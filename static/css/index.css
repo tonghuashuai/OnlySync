@@ -1,0 +1,55 @@
+.banner{
+    border: 1px solid #dfdfdf;
+    border-radius: 3px;
+    margin: 0 10px 20px 10px;
+    box-shadow: 0 0 3px #ddd;
+}
+
+.item{
+    border: 1px solid #dfdfdf;
+    border-radius: 3px;
+    margin: 10px;
+    float: left;
+    box-shadow: 0 0 3px #ddd;
+}
+
+.item img{
+    width: 190px;
+}
+
+@media(max-width:468px){
+    .item{
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .item img{
+        width: 100%;
+    }
+    .banner{
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.item .info{
+    font-size: 10px;
+    margin-top: -27px;
+    text-align: right;
+}
+
+.item .title{
+    padding: 18px 5px 11px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.item .title a{
+    font-size: 13px;
+}
+
+.item .info .price{
+    background: rgba(185,185,185,0.65);
+    color: #fff;
+    padding: 5px;
+}

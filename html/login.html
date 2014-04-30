@@ -1,0 +1,19 @@
+<%inherit file="login_base.html"/>
+<%block name="css">
+<link rel="stylesheet" href="/static/css/login.css">
+</%block>
+<div class="login_container">
+    <h3>登录</h3>
+    <ul>
+        <li>
+            <input placeholder="邮箱" type="text" name="email" id="email"/>
+        </li>
+        <li>
+            <input placeholder="密码" type="password" name="pwd" id="pwd"/>
+        </li>
+        <li>
+            <input type="hidden" id="next_url" value="${next_url}"/>
+            <button type="button" class="btn btn-primary btn-sm" id="btn_login">登录</button>
+        </li>
+    </ul>
+</div>
