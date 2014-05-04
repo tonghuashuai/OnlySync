@@ -13,6 +13,8 @@ urls = [
     (r"/login", LoginHandler),
     (r"/new", NewHandler),
     (r"/setting", SettingHandler),
+    (r"/auth/sina", SinaHandler),
+    (r"/auth/sina_callback", SinacallbackHandler),
 
     (r"/j/parser", ParserHandler),
 ]
