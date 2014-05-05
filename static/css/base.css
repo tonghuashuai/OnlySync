@@ -114,3 +114,7 @@ a:hover{
     transition: all 0.1s linear;
     background-color: #000;
 }
+
+.nav li .clear-r-padding{
+    padding-right: 0;
+}
