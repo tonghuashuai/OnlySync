@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- 最新 Bootstrap 核心 CSS 文件 -->
-        <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/css/base.css">
         <!-- Add fancyBox -->
         <link rel="stylesheet" href="/static/js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
@@ -32,21 +32,27 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="nav_li"><a href="/">首页</a></li>
-                        <li class="nav_li"><a href="/about">关于</a></li>
-                    </ul>
-                    <ul class="nav login">
-                        <li class="nav_li">
+                        <li class="nav_li float-l">
                             % if current_user:
-                                ${current_user.u}
-                            % else:
+                                <a href="javascript: void(0);">${current_user.u}</a>
+                            % endif
+                        </li>
+                        % if current_user:
+                            <li class="nav_li float-r">
+                                <a href="/logout">退出</a>
+                            </li>
+                            <li class="nav_li float-r">
+                                <a href="/setting">设置</a>
+                            </li>
+                        % endif
+                        <li class="nav_li">
+                            % if not current_user:
                                 <a href="/login">登录</a>
                             % endif
                         </li>
-                        <li class="nav_li">
-                            <button type="button" onclick="javascript:location.href='/new'; return false;" class="btn btn-danger">来一发</button>
-                        </li>
-                        <button type="button" onclick="javascript:location.href='/login'; return false;" class="btn btn-default btn-sm">登录</button>
+                        % if not current_user:
+                            <button type="button" onclick="javascript:location.href='/login'; return false;" class="btn btn-default btn-sm">登录</button>
+                        % endif
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -65,9 +71,9 @@
             </div>
         </div>
         <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-        <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+        <script src="/static/js/jquery.min.js"></script>
         <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-        <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
         <script src="/static/js/base.js"></script>
 
         <!-- Add mousewheel plugin (this is optional) -->

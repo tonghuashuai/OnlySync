@@ -33,6 +33,10 @@ a:hover{
     float: right;
 }
 
+.float-l{
+    float: left;
+}
+
 .talign-r{
     text-align: right;
 }
@@ -72,7 +76,7 @@ a:hover{
 
 .login li a{
     color: #999;
-    padding: 15px 0;
+    padding: 15px 15px;
 }
 
 .login li a:hover{
@@ -85,14 +89,6 @@ a:hover{
 }
 
 @media(max-width:767px){
-    .login li{
-        text-align: center;
-    }
-
-    .login li a{
-        display: none;
-    }
-
     .login li button{
         display: none;
     }
@@ -112,4 +108,9 @@ a:hover{
     color: #fff;
     background-color: #428bca;
     border-color: #428bca;
+}
+
+.navbar-inverse .navbar-brand:hover{
+    transition: all 0.1s linear;
+    background-color: #000;
 }
