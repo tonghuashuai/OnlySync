@@ -20,5 +20,12 @@ class TestUnit(object):
     def user_get(cls, args):
         uid = args.get('uid')[0]
         user = User.get(int(uid))
+        user.p = 't'
+        user.update()
 
         return user.get_json() 
+
+    @classmethod
+    def select(cls, args):
+        querys = User.update_access_token(1, "sweibo", "atttt", "2014-01-04")
+        return querys[0].get_json()

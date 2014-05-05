@@ -6,6 +6,7 @@ from _base import BaseHandler
 from model.user import User
 from misc.weibo import APIClient
 from misc.config import *
+
 from misc.python_misc.datetime_misc import *
 
 
@@ -57,12 +58,15 @@ class SinacallbackHandler(BaseHandler):
         access_token = r.access_token # 新浪返回的token，类似abc123xyz456
         expires_in = r.expires_in # token过期的UNIX时间：http://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4
         # TODO: 在此可保存access token
+        User.update_access_token(self.current_user.id, 
+                                 SNSCode.SINA_WEIBO,
+                                 access_token,
+                                 timestamp_datetime(expires_in))
         client.set_access_token(access_token, expires_in)
 
-        print client.statuses.user_timeline.get()
-        print client.statuses.update.post(status=u'测试OAuth 2.0发微博')
-        print client.statuses.upload.post(status=u'测试OAuth 2.0带图片发微博', pic=open('/home/tonghs/42py/css/_img/logo/google.png'))
+        # print client.statuses.user_timeline.get()
+        # print client.statuses.update.post(status=u'测试OAuth 2.0发微博')
+        # print client.statuses.upload.post(status=u'测试OAuth 2.0带图片发微博', pic=open('/home/tonghs/42py/css/_img/logo/google.png'))
 
-        print timestamp_datetime(expires_in)
         
         self.render(code=code)

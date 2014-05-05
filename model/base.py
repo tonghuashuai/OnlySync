@@ -14,12 +14,11 @@ class Base(object):
     def get(cls, o_id):
         model = None
         try:
-            tbl_name = cls.__name__
-            sql = SELECT_BY_ID.format(tbl_name=tbl_name,
-                                      o_id=str(o_id))
-            querys = dba.query(sql)
-            if querys :
-                model = cls.get_from_dict(querys[0])
+            where = "and id = {0}"
+            querys = cls.select(where.format(str(o_id)))
+
+            if querys:
+                model = querys[0]
 
         except Exception as e:
             log.error(e)
@@ -41,11 +40,13 @@ class Base(object):
         return model 
 
     @classmethod
-    def get_all(cls):
+    def select(cls, where=""):
         model_list = []
         try:
+            where = "and {0}".format(where)
             tbl_name = cls.__name__
-            sql = SELECT_ALL.format(tbl_name=tbl_name)
+            sql = SELECT_ALL.format(tbl_name=tbl_name, where=where)
+            log.info(sql)
             models = dba.query(sql)
             
             for dic in models:
@@ -70,7 +71,7 @@ class Base(object):
 
         return model
 
-    def save(self):
+    def insert(self):
         try:
             tbl_name = self.__class__.__name__
             sql = "insert into {tbl_name} ({cols}) values ({vals});"
@@ -96,3 +97,25 @@ class Base(object):
             dba.execute(sql)
         except Exception as e:
             log.error(e)
+
+    def update(self):
+        tbl_name = self.__class__.__name__
+        sql = "update {tbl_name} set {sets} where id={o_id};"
+
+        o_dict = self.get_dict()
+        sets = ""
+        for k, v in o_dict.iteritems():
+            if k != "id":
+                col = k + "="
+                f_type = type(v).__name__
+                # 数字型不需要加引号
+                if f_type == "int" or f_type == "long":
+                    val = str(v) + ","
+                else:
+                    val = "'" +  v + "',"
+
+                sets += col + val
+        sets = sets[:-1]
+        sql = sql.format(tbl_name=tbl_name, sets=sets, o_id=self.id)
+
+        dba.execute(sql)
