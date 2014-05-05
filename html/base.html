@@ -37,7 +37,11 @@
                     </ul>
                     <ul class="nav login">
                         <li class="nav_li">
-                            <a href="/login">登录</a>
+                            % if current_user:
+                                ${current_user.u}
+                            % else:
+                                <a href="/login">登录</a>
+                            % endif
                         </li>
                         <li class="nav_li">
                             <button type="button" onclick="javascript:location.href='/new'; return false;" class="btn btn-danger">来一发</button>

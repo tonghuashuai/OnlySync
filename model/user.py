@@ -3,8 +3,11 @@
 
 import json
 from misc.config import SEX_EN 
+from misc.python_misc.log_misc import Log
 from access import Access
 from base import Base
+
+log = Log()
 
 class User(Base):
     def __init__(self, name="", pwd="", sex=None, email=""):
@@ -16,8 +19,12 @@ class User(Base):
 
     @classmethod
     def login(cls, email, pwd):
-        user = User(email, pwd) 
-        # todo 验证用户
+        user = None
+        where = "email = '{email}' and p = '{p}'".format(email=email, p=pwd)
+        users = User.select(where)
+        if users:
+            user = users[0]
+
         return user 
 
     @classmethod

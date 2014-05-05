@@ -3,6 +3,9 @@
 
 import MySQLdb
 from config import *
+from misc.python_misc.log_misc import Log
+
+log = Log()
 
 conn = MySQLdb.connect(
     host=MYSQL_HOST,

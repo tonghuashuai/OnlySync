@@ -23,21 +23,22 @@ class AboutHandler(BaseHandler):
 class LoginHandler(BaseHandler):
     def get(self):
         next_url = self.get_argument("next", "")
+        msg = self.get_argument("msg", "")
 
-        self.render(next_url=next_url)
+        self.render(next_url=next_url, msg=msg)
 
     def post(self):
         email = self.get_argument("email")
         pwd = self.get_argument("pwd")
         next_url = self.get_argument("next_url", "")
+        next_url = next_url or "/"
 
         user = User.login(email, pwd)
         if user:
-            self.set_secure_cookie("user", user.get_json()) 
-            if not next_url:
-                next_url = "/"
+            self.set_secure_cookie("user", user.get_json())
         else:
-            next_url = "/login"
+            msg = "登录失败，请重试！"
+            next_url = "/login?next={0}&msg={1}".format(next_url, msg)
 
         self.finish(next_url)
 

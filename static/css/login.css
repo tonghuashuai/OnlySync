@@ -64,3 +64,8 @@ ul{
     padding: 0 0 10px 5px;
     margin-bottom: 20px;
 }
+
+.msg{
+    text-align: center;
+    color: red;
+}

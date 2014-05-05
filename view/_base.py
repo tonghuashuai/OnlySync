@@ -19,6 +19,7 @@ class BaseHandler(tornado.web.RequestHandler):
                                                  output_encoding='utf-8')
 
     def render_string(self, filename, **kwargs):
+        kwargs["current_user"] = self.current_user
         template = self.lookup.get_template(filename)
         namespace = self.get_template_namespace()
         namespace.update(kwargs)
