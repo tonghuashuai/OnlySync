@@ -46,7 +46,6 @@ class Base(object):
             where = "and {0}".format(where)
             tbl_name = cls.__name__
             sql = SELECT_ALL.format(tbl_name=tbl_name, where=where)
-            log.info(sql)
             models = dba.query(sql)
             
             for dic in models:
@@ -92,7 +91,6 @@ class Base(object):
             cols = cols[:-1]
             vals = vals[:-1]
             sql = sql.format(tbl_name=tbl_name, cols=cols, vals=vals)
-            log.info(sql)
             
             dba.execute(sql)
         except Exception as e:

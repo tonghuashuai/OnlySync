@@ -32,7 +32,6 @@ class LoginHandler(BaseHandler):
         next_url = self.get_argument("next_url", "")
 
         user = User.login(email, pwd)
-        print user
         if user:
             self.set_secure_cookie("user", user.get_json()) 
             if not next_url:
@@ -57,7 +56,6 @@ class SinacallbackHandler(BaseHandler):
         r = client.request_access_token(code)
         access_token = r.access_token # 新浪返回的token，类似abc123xyz456
         expires_in = r.expires_in # token过期的UNIX时间：http://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4
-        # TODO: 在此可保存access token
         User.update_access_token(self.current_user.id, 
                                  SNSCode.SINA_WEIBO,
                                  access_token,
@@ -68,5 +66,9 @@ class SinacallbackHandler(BaseHandler):
         # print client.statuses.update.post(status=u'测试OAuth 2.0发微博')
         # print client.statuses.upload.post(status=u'测试OAuth 2.0带图片发微博', pic=open('/home/tonghs/42py/css/_img/logo/google.png'))
 
-        
-        self.render(code=code)
+        js_ = """
+            <script>
+                parent.$.fancybox.close()
+            </script>
+        """
+        self.render(js_=js_)
