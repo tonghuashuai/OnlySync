@@ -23,3 +23,4 @@ MYSQL_USR = "root"
 MYSQL_PWD = "admin"
 
 SELECT_ALL = "select * from {tbl_name};"
+SELECT_BY_ID = "select * from {tbl_name} where id = {o_id};"

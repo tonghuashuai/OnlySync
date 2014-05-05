@@ -11,10 +11,16 @@ conn = MySQLdb.connect(
     db=MYSQL_DB,
     charset="utf8")
 
-cursor = conn.cursor(cursorclass = MySQLdb.cursors.DictCursor)
+def get_cursor():
+    cursor = conn.cursor(cursorclass = MySQLdb.cursors.DictCursor)
+    return cursor
 
 def query(sql):
+    cursor = get_cursor()
     count = cursor.execute(sql)
 
     return cursor.fetchall()
     
+def execute(sql):
+    cursor = get_cursor()
+    cursor.execute(sql)

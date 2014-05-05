@@ -3,6 +3,7 @@
 
 
 from view.root import * 
+from view.test.root import *
 from view.home.root import *
 from view.j.root import *
 
@@ -17,4 +18,6 @@ urls = [
     (r"/auth/sina_callback", SinacallbackHandler),
 
     (r"/j/parser", ParserHandler),
+
+    (r"/t", TestHandler),
 ]

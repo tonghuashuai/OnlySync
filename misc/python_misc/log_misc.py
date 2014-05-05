@@ -32,6 +32,9 @@ class Log(object):
     def warning(self, msg):
         self.logger.warning(msg)
 
+    def error(self, msg):
+        self.logger.error(msg)
+
     def get_handler(self):
         handler_list = []
         if LOG_HANDLER == LogHanlderDict.c:

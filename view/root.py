@@ -11,9 +11,7 @@ from misc.python_misc.datetime_misc import *
 
 class IndexHandler(BaseHandler):
     def get(self):
-        o_list = User.get()
-        o_list[0].save()
-        self.render(o_list=o_list)
+        self.render()
 
 
 class AboutHandler(BaseHandler):
