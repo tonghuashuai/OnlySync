@@ -42,6 +42,11 @@ class LoginHandler(BaseHandler):
 
         self.finish(next_url)
 
+class LogoutHandler(BaseHandler):
+    def get(self):
+        self.clear_cookie("user")
+        self.redirect("/")
+
 class SinaHandler(BaseHandler):
     def get(self):
         client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)

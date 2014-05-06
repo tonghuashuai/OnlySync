@@ -12,6 +12,7 @@ urls = [
     (r"/", IndexHandler),
     (r"/about", AboutHandler),
     (r"/login", LoginHandler),
+    (r"/logout", LogoutHandler),
     (r"/new", NewHandler),
     (r"/setting", SettingHandler),
     (r"/auth/sina", SinaHandler),
