@@ -7,3 +7,5 @@ $("#btn_sweibo").fancybox({
         window.location.reload();
     }
 });
+
+$(".navbar-nav>.active").addClass("float-r");
