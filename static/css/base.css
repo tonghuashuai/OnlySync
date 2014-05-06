@@ -88,9 +88,13 @@ a:hover{
     display: none;
 }
 
+.nav li .clear-r-padding{
+    padding-right: 0;
+}
+
 @media(max-width:767px){
-    .login li button{
-        display: none;
+    .nav li .clear-r-padding{
+        padding-right: 15px;
     }
 
     .login .btn-sm{
@@ -113,8 +117,4 @@ a:hover{
 .navbar-inverse .navbar-brand:hover{
     transition: all 0.1s linear;
     background-color: #000;
-}
-
-.nav li .clear-r-padding{
-    padding-right: 0;
 }

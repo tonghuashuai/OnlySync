@@ -45,14 +45,11 @@
                                 <a href="/setting">设置</a>
                             </li>
                         % endif
-                        <li class="nav_li">
+                        <li class="nav_li float-r">
                             % if not current_user:
                                 <a href="/login">登录</a>
                             % endif
                         </li>
-                        % if not current_user:
-                            <button type="button" onclick="javascript:location.href='/login'; return false;" class="btn btn-default btn-sm">登录</button>
-                        % endif
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
