@@ -97,25 +97,28 @@ class Base(object):
             log.error(e)
 
     def update(self):
-        tbl_name = self.__class__.__name__
-        sql = "update {tbl_name} set {sets} where id={o_id};"
+        try:
+            tbl_name = self.__class__.__name__
+            sql = "update {tbl_name} set {sets} where id={o_id};"
 
-        o_dict = self.get_dict()
-        sets = ""
-        for k, v in o_dict.iteritems():
-            if k != "id":
-                col = k + "="
-                f_type = type(v).__name__
-                # 数字型不需要加引号
-                if f_type == "int" or f_type == "long":
-                    val = str(v) + ","
-                elif f_type == "NoneType":
-                    val = "NULL,"
-                else:
-                    val = "'" +  v + "',"
+            o_dict = self.get_dict()
+            sets = ""
+            for k, v in o_dict.iteritems():
+                if k != "id":
+                    col = k + "="
+                    f_type = type(v).__name__
+                    # 数字型不需要加引号
+                    if f_type == "int" or f_type == "long":
+                        val = str(v) + ","
+                    elif f_type == "NoneType":
+                        val = "NULL,"
+                    else:
+                        val = "'" +  v + "',"
 
-                sets += col + val
-        sets = sets[:-1]
-        sql = sql.format(tbl_name=tbl_name, sets=sets, o_id=self.id)
+                    sets += col + val
+            sets = sets[:-1]
+            sql = sql.format(tbl_name=tbl_name, sets=sets, o_id=self.id)
 
-        dba.execute(sql)
+            dba.execute(sql)
+        except Exception as e:
+            log.error(e)

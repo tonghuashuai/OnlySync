@@ -35,3 +35,4 @@ class SNSCode(object):
     SINA_WEIBO = "sweibo"
     WEIXIN = "weixin"
     RENREN = "renren"
+    DOUBAN = "douban"

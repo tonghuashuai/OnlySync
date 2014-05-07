@@ -1,20 +1,31 @@
 #!/usr/bin/env python
 #coding:utf-8
 
-
+import json
 from _base import BaseHandler
 from model.user import User
+from misc import dba
 from misc.weibo import APIClient as SinaClient
 from misc.renren import APIClient as RenrenClient
 from misc.config import *
+from misc.message import Message
 
 from misc.python_misc.datetime_misc import *
 
 
 class IndexHandler(BaseHandler):
     def get(self):
-        self.render()
+        sql = "select SNS.name, SNS.icon, SNS.code, Access.access_token, Access.expires_time, Access.expires_in, Access.u_id from SNS left join Access on SNS.code = Access.sns_code where u_id = 1 or u_id is null;"
+        querys = dba.query(sql)
+        self.render(querys=querys)
 
+    def post(self):
+        data = self.get_argument("data")
+        msg = self.get_argument("msg")
+        objs = json.loads(data)
+        Message.send(objs, msg)
+
+        self.finish({})
 
 class AboutHandler(BaseHandler):
     def get(self):
@@ -66,7 +77,8 @@ class SinacallbackHandler(BaseHandler):
         User.update_access_token(self.current_user.id, 
                                  SNSCode.SINA_WEIBO,
                                  access_token,
-                                 timestamp_datetime(expires_in))
+                                 timestamp_datetime(expires_in),
+                                 expires_in)
         client.set_access_token(access_token, expires_in)
 
         # print client.statuses.user_timeline.get()
@@ -102,7 +114,8 @@ class RenrencallbackHandler(BaseHandler):
         User.update_access_token(self.current_user.id, 
                                  SNSCode.RENREN,
                                  access_token,
-                                 timestamp_datetime(expires_in))
+                                 timestamp_datetime(expires_in),
+                                 expires_in)
         client.set_access_token(access_token)
 
         # print client.user.get(userId="234999822")

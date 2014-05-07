@@ -28,7 +28,8 @@ class User(Base):
         return user 
 
     @classmethod
-    def update_access_token(cls, uid, sns_code, access_token, expires_time):
+    def update_access_token(cls, uid, sns_code, access_token,
+                            expires_time, expires_in):
         uid = int(uid)
         where = "u_id = {uid} and sns_code = '{sns_code}'"
         where = where.format(uid=uid, sns_code=sns_code)
@@ -41,5 +42,7 @@ class User(Base):
             access = querys[0]
             access.access_token = access_token
             access.expires_time = expires_time
+            access.expires_in = expires_in
+
             access.update()
         return querys

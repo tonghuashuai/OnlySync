@@ -6,4 +6,4 @@ create table if not exists `SNS`(id int(10) primary key unique auto_increment no
 insert into `SNS` (name, icon, code) values ('新浪微博', '/static/img/weibo.png', 'sweibo');
 insert into `SNS` (name, icon, code) values ('微信', '/static/img/weixin.png', 'weixin');
 
-create table if not exists `Access` (id int(10) primary key unique auto_increment not null, u_id int(10) not null, sns_code varchar(10) not null, access_token varchar(100), expires_time datetime);
+create table if not exists `Access` (id int(10) primary key unique auto_increment not null, u_id int(10) not null, sns_code varchar(10) not null, access_token varchar(100), expires_time datetime, expires_in int(10));

@@ -13,5 +13,5 @@ class UnbandHandler(BaseHandler):
         code = self.get_argument("code")
 
         User.update_access_token(self.current_user.id, 
-                                 code, None, None)
+                                 code, None, None, None)
 

@@ -1,3 +1,30 @@
 <%inherit file="base.html"/>
 <link rel="stylesheet" href="/static/css/index.css"/>
-来一发
+% if current_user:
+    <div class="form-group">
+        <label for="memo" class="control-label">来一发</label>
+        <textarea id="txt" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="for-grop talign-r">
+        % if querys:
+            <ul>
+                % for obj in querys:
+                    <li class="item">
+                        % if obj.get('expires_time'):
+                            <a href="javascript:void(0);" title="${obj.get('name')}" class="access" expires_in="${obj.get('expires_in')}" code="${obj.get('code')}" access_token="${obj.get('access_token')}"/><img alt="${obj.get('name')}" src="${obj.get('icon')}"/></a>
+                        % else:
+                            <a href="javascript:void(0);" title="${obj.get('name')} 未授权"/><img alt="${obj.get('name')} 未授权" class="gray" src="${obj.get('icon')}"/></a>
+                        % endif
+                    </li>
+                % endfor
+                <li class="item">
+                    <a href="/setting" title="设置授权"/><img alt="设置授权" src="/static/img/cog.png"/></a>
+                </li>
+            </ul>
+        % endif
+        <button type="button" class="btn btn-primary" id="btn_submit">确 定</button>
+    </div>
+% endif
+<%block name="js">
+    <script src="/static/js/index.js"></script>
+</%block>

@@ -25,6 +25,14 @@ a:hover{
     -o-transition: all 0.1s linear;
 }
 
+textarea{
+    resize: none;
+}
+
+ul li{
+    list-style: none;
+}
+
 .clear{
     clear: both;
 }
@@ -117,4 +125,15 @@ a:hover{
 .navbar-inverse .navbar-brand:hover{
     transition: all 0.1s linear;
     background-color: #000;
+}
+
+.gray { 
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    
+    filter: grayscale(100%);
+    
+    filter: gray;
 }

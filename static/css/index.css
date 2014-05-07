@@ -5,16 +5,17 @@
     box-shadow: 0 0 3px #ddd;
 }
 
-.item{
-    border: 1px solid #dfdfdf;
-    border-radius: 3px;
-    margin: 10px;
+ul{
+    margin: 0;
+    padding: 0;
+}
+ul .item{
     float: left;
-    box-shadow: 0 0 3px #ddd;
 }
 
-.item img{
-    width: 190px;
+ul .item img{
+    width: 20px;
+    margin-right: 5px;
 }
 
 @media(max-width:468px){
