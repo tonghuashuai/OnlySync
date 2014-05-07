@@ -109,6 +109,8 @@ class Base(object):
                 # 数字型不需要加引号
                 if f_type == "int" or f_type == "long":
                     val = str(v) + ","
+                elif f_type == "NoneType":
+                    val = "NULL,"
                 else:
                     val = "'" +  v + "',"
 

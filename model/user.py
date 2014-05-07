@@ -41,4 +41,5 @@ class User(Base):
             access = querys[0]
             access.access_token = access_token
             access.expires_time = expires_time
+            access.update()
         return querys

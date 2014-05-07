@@ -5,17 +5,20 @@
 </%block>
 
 <div class="item_container">
-    <div class="form-group">
-        <span class="sns_list_icon" style="background-image:url('/static/img/weibo.png');"/>&nbsp;</span>
-        <span class="sns_list_name">新浪微博</span>
-        <span class="sns_list_state">未开通</span>
-        <button type="button" id="btn_sweibo" class="btn btn-primary">授权</button>
-    </div>
-    <div class="form-group">
-        <span class="sns_list_icon" style="background-image:url('/static/img/weixin.png');"/>&nbsp;</span>
-        <span class="sns_list_name">微信</span>
-        <span class="sns_list_state">未开通</span>
-        <button type="button" id="btn_weixin" class="btn btn-primary">授权</button>
+    % if querys:
+        % for obj in querys:
+            <div class="form-group">
+                <span class="sns_list_icon" style="background-image:url(${obj.get('icon')});"/>&nbsp;</span>
+                <span class="sns_list_name">${obj.get('name')}</span>
+                <span class="sns_list_state">${obj.get('expires_time') or "未授权"}</span>
+                % if obj.get('expires_time'):
+                    <button type="button" id="${obj.get('code')}" class="btn btn-danger btn_unband">解 除</button>
+                % else:
+                    <button type="button" id="btn_${obj.get('code')}" class="btn btn-primary">授 权</button>
+                % endif
+            </div>
+        % endfor
+    % endif
     </div>
     
     <div class="clear"></div>
