@@ -18,3 +18,17 @@ $("#btn_submit").click(function(){
         
     });
 });
+
+$("#login").click(function(){
+    window.location.href = "/login"
+});
+
+access_count = 0
+$(".access").each(function(){
+    access_count += 1;
+});
+
+if(access_count == 0 && $(".gray").length> 0){
+    $("#txt").attr("disabled", "disabled");
+    $(".msg").html("请先 <a href='/setting'>设置</a> 授权后再发状态！");
+}

@@ -13,10 +13,8 @@
                         <span class="sns_list_icon" style="background-image:url(${obj.get('icon')});"/>&nbsp;</span>
                         <span class="sns_list_name">${obj.get('name')}</span>
                         % if obj.get('access_token'):
-                            <span class="sns_list_state">${obj.get('expires_time') or "已授权"}</span>
                             <button type="button" id="${obj.get('code')}" class="btn btn-danger float-r btn_unband">取消授权</button>
                         % else:
-                            <span class="sns_list_state">未授权</span>
                             <button type="button" id="btn_${obj.get('code')}" class="btn btn-primary float-r">立即授权</button>
                         % endif
                     </li>

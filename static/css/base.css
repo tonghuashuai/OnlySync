@@ -49,6 +49,10 @@ ul li{
     text-align: right;
 }
 
+.talign-c{
+    text-align: center;
+}
+
 .minor-text{
     color: #999;
     font-size: 13px;
@@ -136,4 +140,13 @@ ul li{
     filter: grayscale(100%);
     
     filter: gray;
+}
+
+.msg{
+    text-align: center;
+    color: red;
+}
+
+.msg a{
+    color: #3276b1;    
 }
