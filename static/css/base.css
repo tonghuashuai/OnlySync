@@ -150,3 +150,10 @@ ul li{
 .msg a{
     color: #3276b1;    
 }
+
+.footer{
+    position:absolute;
+    bottom:10px; 
+    text-align: center;
+    width: 100%
+}
