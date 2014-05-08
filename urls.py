@@ -20,9 +20,11 @@ urls = [
     (r"/auth/sina", SinaHandler),
     (r"/auth/renren", RenrenHandler),
     (r"/auth/douban", DoubanHandler),
+    (r"/auth/tweibo", TweiboHandler),
     (r"/auth/sina_callback", SinacallbackHandler),
     (r"/auth/renren_callback", RenrencallbackHandler),
     (r"/auth/douban_callback", DoubancallbackHandler),
+    (r"/auth/tweibo_callback", TweibocallbackHandler),
 
     (r"/j/parser", ParserHandler),
     (r"/j/unband", UnbandHandler),

@@ -15,7 +15,7 @@ class Message(object):
             for obj in access_info_list:
                 access_token = obj.get("access_token")
                 expires_in = obj.get("expires_in")
-                if obj.get("code") == SNSCode.SINA_WEIBO:
+                if obj.get("code") == SNSCode.SWEIBO:
                     client = SinaClient()
                     client.set_access_token(access_token, expires_in)
                     client.statuses.update.post(status=msg)

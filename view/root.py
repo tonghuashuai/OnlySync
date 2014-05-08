@@ -8,6 +8,8 @@ from misc import dba
 from misc.weibo import APIClient as SinaClient
 from misc.renren import APIClient as RenrenClient
 from misc.douban_client import DoubanClient
+from misc.tweibo import API, JSONParser
+from misc.tweibo import OAuth2_0_Handler as AuthHandler
 from misc.config import *
 from misc.message import Message
 
@@ -76,7 +78,7 @@ class SinacallbackHandler(BaseHandler):
         access_token = r.access_token # 新浪返回的token，类似abc123xyz456
         expires_in = r.expires_in # token过期的UNIX时间：http://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4
         User.update_access_token(self.current_user.id, 
-                                 SNSCode.SINA_WEIBO,
+                                 SNSCode.SWEIBO,
                                  access_token,
                                  timestamp_datetime(expires_in),
                                  expires_in)
@@ -140,6 +142,39 @@ class DoubancallbackHandler(BaseHandler):
         js_ = """
             <script>
                 parent.$.fancybox.close()
+            </script>
+        """
+        self.write(js_)
+
+class TweiboHandler(BaseHandler):
+    def get(self):
+        auth = AuthHandler()
+        ## use get_authorization_url if you haven't got a token
+        url = auth.get_authorization_url()
+
+        self.redirect(url)
+
+
+class TweibocallbackHandler(BaseHandler):
+    def get(self):
+        code = self.get_argument("code")
+        auth = AuthHandler()
+        r = auth.get_access_token(code)
+        access_token = r["access_token"]
+        expires_in = int(r["expires_in"])
+
+        User.update_access_token(self.current_user.id, 
+                                 SNSCode.TWEIBO,
+                                 access_token,
+                                 timestamp_datetime(expires_in),
+                                 expires_in)
+        # now you have a workable api
+        api = API(auth, parser=JSONParser())
+        api.tweet.add('测试发帖....本帖来自 #onlysync#.')
+
+        js_ = """
+            <script>
+                window.location.href="/setting"
             </script>
         """
         self.write(js_)

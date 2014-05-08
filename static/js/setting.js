@@ -22,8 +22,15 @@ $("#btn_douban").fancybox({
     }
 });
 
-$(".navbar-nav>.active").addClass("float-r");
+tweibo_html = '<iframe src="/auth/tweibo" width="610" height="410"/>'
+$("#btn_tweibo").fancybox({
+    content: tweibo_html,
+    afterClose: function(){
+        window.location.reload();
+    }
+});
 
+$(".navbar-nav>.active").addClass("float-r");
 
 $(".btn_unband").click(function(){
     code = $(this).attr("id");
