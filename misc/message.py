@@ -4,6 +4,7 @@
 from misc.config import SNSCode 
 from misc.weibo import APIClient as SinaClient
 from misc.renren import APIClient as RenrenClient
+from misc.douban_client import DoubanClient
 from misc.config import *
 
 class Message(object):
@@ -22,6 +23,10 @@ class Message(object):
                     client = RenrenClient() 
                     client.set_access_token(access_token)
                     client.status.put(content=msg) #Requires read_user_status,status_update scopes
+                elif obj.get("code") == SNSCode.DOUBAN:
+                    client = DoubanClient() 
+                    client.auth_with_token(access_token)
+                    client.miniblog.new(msg)
 
         # print client.statuses.user_timeline.get()
         # print client.statuses.update.post(status=u'测试OAuth 2.0发微博')

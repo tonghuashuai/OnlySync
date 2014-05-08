@@ -133,6 +133,7 @@ class APIClient:
         redirect = redirect_uri if redirect_uri else self.redirect_uri
         params = dict(client_id=self.app_key, redirect_uri=redirect,
                       response_type=self.response_type)
+        scope = scope or REN_SCOPE
         if scope:
             params["scope"] = " ".join(scope)
         if force_relogin:

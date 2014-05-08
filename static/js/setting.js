@@ -14,6 +14,14 @@ $("#btn_renren").fancybox({
     }
 });
 
+douban_html = '<iframe src="/auth/douban" width="350" height="450"/>'
+$("#btn_douban").fancybox({
+    content: douban_html,
+    afterClose: function(){
+        window.location.reload();
+    }
+});
+
 $(".navbar-nav>.active").addClass("float-r");
 
 

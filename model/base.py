@@ -78,6 +78,7 @@ class Base(object):
             vals = ""
 
             o_dict = self.get_dict()
+            print o_dict
             for k, v in o_dict.iteritems():
                 if k != "id":
                     cols += k + ","
@@ -85,13 +86,14 @@ class Base(object):
                     # 数字型不需要加引号
                     if f_type == "int" or f_type == "long":
                         vals += str(v) + ","
+                    elif f_type == "NoneType":
+                        vals += "NULL,"
                     else:
                         vals += "'" +  v + "',"
 
             cols = cols[:-1]
             vals = vals[:-1]
             sql = sql.format(tbl_name=tbl_name, cols=cols, vals=vals)
-            
             dba.execute(sql)
         except Exception as e:
             log.error(e)

@@ -10,7 +10,7 @@
             <ul>
                 % for obj in querys:
                     <li class="item">
-                        % if obj.get('expires_time'):
+                        % if obj.get('access_token'):
                             <a href="javascript:void(0);" title="${obj.get('name')}" class="access" expires_in="${obj.get('expires_in')}" code="${obj.get('code')}" access_token="${obj.get('access_token')}"/><img alt="${obj.get('name')}" src="${obj.get('icon')}"/></a>
                         % else:
                             <a href="javascript:void(0);" title="${obj.get('name')} 未授权"/><img alt="${obj.get('name')} 未授权" class="gray" src="${obj.get('icon')}"/></a>

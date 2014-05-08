@@ -22,6 +22,14 @@ SINA_CALLBACK_URL = "http://job.tonghs.com:8089/auth/sina_callback" # callback u
 REN_APP_KEY = "267824"
 REN_APP_SECRET = "9ccb1b104de449ebb7ab5b5df398ec6d"
 REN_REDIRECT_URI = "http://job.tonghs.com:8089/auth/renren_callback"
+REN_SCOPE= ["status_update", "photo_upload", "read_user_status"]
+
+# douban
+DOUBAN_APP_KEY = "05d6fd652e63364b1184f82f8b29a2e1"
+DOUBAN_APP_SECRET = "b9dfa5c1a62eb874"
+DOUBAN_REDIRECT_URI  = "http://job.tonghs.com:8089/auth/douban_callback"
+DOUBAN_SCOPE = 'douban_basic_common,shuo_basic_r,shuo_basic_w'
+
 
 MYSQL_HOST = "127.0.0.1"
 MYSQL_DB = "onlysync"

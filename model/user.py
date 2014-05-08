@@ -36,7 +36,7 @@ class User(Base):
         querys = Access.select(where)
 
         if len(querys) == 0:
-            a = Access(uid, sns_code, access_token, expires_time)
+            a = Access(uid, sns_code, access_token, expires_time, expires_in)
             a.insert()
         else:
             access = querys[0]

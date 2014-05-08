@@ -7,6 +7,7 @@ from model.user import User
 from misc import dba
 from misc.weibo import APIClient as SinaClient
 from misc.renren import APIClient as RenrenClient
+from misc.douban_client import DoubanClient
 from misc.config import *
 from misc.message import Message
 
@@ -79,7 +80,6 @@ class SinacallbackHandler(BaseHandler):
                                  access_token,
                                  timestamp_datetime(expires_in),
                                  expires_in)
-        client.set_access_token(access_token, expires_in)
 
         js_ = """
             <script>
@@ -91,8 +91,7 @@ class SinacallbackHandler(BaseHandler):
 class RenrenHandler(BaseHandler):
     def get(self):
         client = RenrenClient() 
-        scope = ["status_update", "photo_upload", "read_user_status"]
-        url = client.get_authorize_url(scope=scope)
+        url = client.get_authorize_url()
 
         self.redirect(url)
 
@@ -110,8 +109,34 @@ class RenrencallbackHandler(BaseHandler):
                                  access_token,
                                  timestamp_datetime(expires_in),
                                  expires_in)
-        client.set_access_token(access_token)
 
+        js_ = """
+            <script>
+                parent.$.fancybox.close()
+            </script>
+        """
+        self.write(js_)
+
+
+class DoubanHandler(BaseHandler):
+    def get(self):
+        client = DoubanClient()
+        url = client.authorize_url
+
+        self.redirect(url)
+
+
+class DoubancallbackHandler(BaseHandler):
+    def get(self):
+        code = self.get_argument("code")
+        client = DoubanClient()
+        client.auth_with_code(code)
+        token_code = client.token_code
+
+        User.update_access_token(self.current_user.id, 
+                                 SNSCode.DOUBAN,
+                                 token_code,
+                                 None, None)
         js_ = """
             <script>
                 parent.$.fancybox.close()
