@@ -30,7 +30,6 @@ $("#btn_tweibo").fancybox({
     }
 });
 
-$(".navbar-nav>.active").addClass("float-r");
 
 $(".btn_unband").click(function(){
     code = $(this).attr("id");

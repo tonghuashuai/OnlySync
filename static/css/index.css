@@ -19,14 +19,6 @@ ul .item img{
 }
 
 @media(max-width:468px){
-    .item{
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .item img{
-        width: 100%;
-    }
     .banner{
         margin-left: 0;
         margin-right: 0;

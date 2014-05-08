@@ -19,3 +19,4 @@ function show_loading(){
 function close_loading(){
     $("#loading").html('');
 }
+$(".navbar-nav>.active").addClass("float-r");

@@ -8,3 +8,8 @@ $("#btn_login").click(function(){
         }
     });
 });
+$("#pwd").keypress(function(event){
+    if (event.which == 13){
+        $("#btn_login").click();
+    }
+});
