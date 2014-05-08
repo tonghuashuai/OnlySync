@@ -6,6 +6,7 @@ import json
 import time
 import urllib
 import urllib2
+from misc.config import *
 
 
 #HTTP Method code
@@ -117,11 +118,11 @@ class APIClient:
     #Oauth URI
     OAUTH_URI = "https://graph.renren.com/oauth/"
 
-    def __init__(self, app_key, app_secret, redirect_uri,
+    def __init__(self, app_key="", app_secret="", redirect_uri="",
                  response_type="code", version=2):
-        self.app_key = str(app_key)
-        self.app_secret = str(app_secret)
-        self.redirect_uri = redirect_uri
+        self.app_key = str(app_key) or REN_APP_KEY 
+        self.app_secret = str(app_secret) or REN_APP_SECRET 
+        self.redirect_uri = redirect_uri or REN_REDIRECT_URI 
         self.response_type = response_type
         self.access_token = None
         self.version = version

@@ -15,11 +15,20 @@ class Message(object):
                 access_token = obj.get("access_token")
                 expires_in = obj.get("expires_in")
                 if obj.get("code") == SNSCode.SINA_WEIBO:
-                    client = SinaClient(app_key=SINA_APP_KEY, app_secret=SINA_APP_SECRET, redirect_uri=SINA_CALLBACK_URL)
+                    client = SinaClient()
                     client.set_access_token(access_token, expires_in)
                     client.statuses.update.post(status=msg)
                 elif obj.get("code") == SNSCode.RENREN:
-                    client = RenrenClient(app_key=REN_APP_KEY, app_secret=REN_APP_SECRET,
-                                          redirect_uri=REN_REDIRECT_URI) 
+                    client = RenrenClient() 
                     client.set_access_token(access_token)
                     client.status.put(content=msg) #Requires read_user_status,status_update scopes
+
+        # print client.statuses.user_timeline.get()
+        # print client.statuses.update.post(status=u'测试OAuth 2.0发微博')
+        # print client.statuses.upload.post(status=u'测试OAuth 2.0带图片发微博', pic=open('/home/tonghs/42py/css/_img/logo/google.png'))
+
+        # print client.user.get(userId="234999822")
+        # print client.status.put(content="test") #Requires read_user_status,status_update scopes
+        # f = open("/home/tonghs/42py/css/_img/logo/google.png", "rb")
+        # r = client.photo.upload(file=f, filename="test.png")
+        # f.close()  # you need to do this manually

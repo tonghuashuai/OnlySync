@@ -14,6 +14,8 @@ except ImportError:
     from StringIO import StringIO
 
 import gzip, time, json, hmac, base64, hashlib, urllib, urllib2, logging, mimetypes, collections
+from misc.config import *
+
 
 class APIError(StandardError):
     '''
@@ -183,10 +185,10 @@ class APIClient(object):
     '''
     API client using synchronized invocation.
     '''
-    def __init__(self, app_key, app_secret, redirect_uri=None, response_type='code', domain='api.weibo.com', version='2'):
-        self.client_id = str(app_key)
-        self.client_secret = str(app_secret)
-        self.redirect_uri = redirect_uri
+    def __init__(self, app_key='', app_secret='', redirect_uri=None, response_type='code', domain='api.weibo.com', version='2'):
+        self.client_id = str(app_key) or SINA_APP_KEY 
+        self.client_secret = str(app_secret) or SINA_APP_SECRET 
+        self.redirect_uri = redirect_uri or SINA_CALLBACK_URL 
         self.response_type = response_type
         self.auth_url = 'https://%s/oauth2/' % domain
         self.api_url = 'https://%s/%s/' % (domain, version)

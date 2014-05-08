@@ -61,7 +61,7 @@ class LogoutHandler(BaseHandler):
 
 class SinaHandler(BaseHandler):
     def get(self):
-        client = SinaClient(app_key=SINA_APP_KEY, app_secret=SINA_APP_SECRET, redirect_uri=SINA_CALLBACK_URL)
+        client = SinaClient()
         url = client.get_authorize_url()
         
         self.redirect(url)
@@ -70,7 +70,7 @@ class SinacallbackHandler(BaseHandler):
     def get(self):
         # 获取URL参数code:
         code = self.get_argument('code')
-        client = SinaClient(app_key=SINA_APP_KEY, app_secret=SINA_APP_SECRET, redirect_uri=SINA_CALLBACK_URL)
+        client = SinaClient()
         r = client.request_access_token(code)
         access_token = r.access_token # 新浪返回的token，类似abc123xyz456
         expires_in = r.expires_in # token过期的UNIX时间：http://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4
@@ -81,10 +81,6 @@ class SinacallbackHandler(BaseHandler):
                                  expires_in)
         client.set_access_token(access_token, expires_in)
 
-        # print client.statuses.user_timeline.get()
-        # print client.statuses.update.post(status=u'测试OAuth 2.0发微博')
-        # print client.statuses.upload.post(status=u'测试OAuth 2.0带图片发微博', pic=open('/home/tonghs/42py/css/_img/logo/google.png'))
-
         js_ = """
             <script>
                 parent.$.fancybox.close()
@@ -94,8 +90,7 @@ class SinacallbackHandler(BaseHandler):
 
 class RenrenHandler(BaseHandler):
     def get(self):
-        client = RenrenClient(app_key=REN_APP_KEY, app_secret=REN_APP_SECRET,
-                              redirect_uri=REN_REDIRECT_URI) 
+        client = RenrenClient() 
         scope = ["status_update", "photo_upload", "read_user_status"]
         url = client.get_authorize_url(scope=scope)
 
@@ -104,8 +99,7 @@ class RenrenHandler(BaseHandler):
 class RenrencallbackHandler(BaseHandler):
     def get(self):
         code = self.get_argument('code')
-        client = RenrenClient(app_key=REN_APP_KEY, app_secret=REN_APP_SECRET,
-                              redirect_uri=REN_REDIRECT_URI) 
+        client = RenrenClient()
         r = client.request_access_token(code)
         access_token = r["access_token"]  # access token
         expires_in = r["expires_in"] # access token expires in time
@@ -118,11 +112,6 @@ class RenrencallbackHandler(BaseHandler):
                                  expires_in)
         client.set_access_token(access_token)
 
-        # print client.user.get(userId="234999822")
-        # print client.status.put(content="test") #Requires read_user_status,status_update scopes
-        # f = open("/home/tonghs/42py/css/_img/logo/google.png", "rb")
-        # r = client.photo.upload(file=f, filename="test.png")
-        # f.close()  # you need to do this manually
         js_ = """
             <script>
                 parent.$.fancybox.close()
