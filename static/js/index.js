@@ -30,8 +30,20 @@ $(".access").each(function(){
     access_count += 1;
 });
 
+$("#btn_submit").attr("disabled", "disabled");
+
 if(access_count == 0 && $(".gray").length> 0){
     $("#txt").attr("disabled", "disabled");
-    $("#btn_submit").attr("disabled", "disabled");
     $(".msg").html("请先 <a href='/setting'>设置授权</a> 后再发状态！");
+}
+
+function show_size(event, obj){
+    len = obj.val().length;
+    $("#size").text(len);
+
+    if (len > 0){
+        $("#btn_submit").removeAttr("disabled");
+    }else{
+        $("#btn_submit").attr("disabled", "disabled");
+    }
 }

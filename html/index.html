@@ -4,7 +4,7 @@
     <div class="form-group">
         <div class="msg"></div>
         <label for="memo" class="control-label"></label>
-        <textarea id="txt" class="form-control" rows="3" placeholder="来一发"></textarea>
+        <textarea id="txt" class="form-control" oninput="show_size(event, $(this));" onpropertychange="show_size(event, $(this));" rows="8" placeholder="来一发" maxlength="140"></textarea>
     </div>
     <div class="for-grop talign-r">
         % if querys:
@@ -23,6 +23,7 @@
                 </li>
             </ul>
         % endif
+        <div class="size"><span id="size">0</span> 字</div>
         <button type="button" class="btn btn-primary" id="btn_submit">确 定</button>
     </div>
 % else:
