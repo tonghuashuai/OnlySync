@@ -16,6 +16,7 @@ urls = [
     (r"/logout", LogoutHandler),
     (r"/new", NewHandler),
     (r"/setting", SettingHandler),
+    (r"/share", ShareHandler),
 
     (r"/auth/sina", SinaHandler),
     (r"/auth/renren", RenrenHandler),

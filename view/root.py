@@ -62,6 +62,12 @@ class LogoutHandler(BaseHandler):
         self.clear_cookie("user")
         self.redirect("/")
 
+class ShareHandler(BaseHandler):
+    def get(self):
+        txt = self.get_argument("txt", "")
+        txt = txt.replace("<", "&lt;").replace(">", "&gt;")
+        self.render(txt=txt)
+
 class SinaHandler(BaseHandler):
     def get(self):
         client = SinaClient()

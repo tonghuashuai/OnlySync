@@ -1,0 +1,16 @@
+.share_btns{
+    margin-top: 30px;
+}
+
+#btn_container{
+    display: none;
+}
+
+@media(max-width:640px){
+    #btn_container{
+        display: block;
+        position:absolute;
+        bottom: 80px; 
+        width: 100%;
+    }
+}
