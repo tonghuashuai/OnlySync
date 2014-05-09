@@ -18,7 +18,7 @@ from misc.python_misc.datetime_misc import *
 
 class IndexHandler(BaseHandler):
     def get(self):
-        sql = "select SNS.name, SNS.icon, SNS.code, Access.access_token, Access.expires_time, Access.expires_in, Access.u_id from SNS left join Access on SNS.code = Access.sns_code where u_id = 1 or u_id is null;"
+        sql = "select SNS.name, SNS.icon, SNS.code, Access.access_token, Access.expires_time, Access.expires_in, Access.open_id, Access.u_id from SNS left join Access on SNS.code = Access.sns_code where u_id = 1 or u_id is null;"
         querys = dba.query(sql)
         self.render(querys=querys)
 
@@ -161,16 +161,14 @@ class TweibocallbackHandler(BaseHandler):
         auth = AuthHandler()
         r = auth.get_access_token(code)
         access_token = r["access_token"]
+        open_id = r["openid"]
         expires_in = int(r["expires_in"])
 
         User.update_access_token(self.current_user.id, 
                                  SNSCode.TWEIBO,
                                  access_token,
                                  timestamp_datetime(expires_in),
-                                 expires_in)
-        # now you have a workable api
-        api = API(auth, parser=JSONParser())
-        api.tweet.add('测试发帖....本帖来自 #onlysync#.')
+                                 expires_in, open_id)
 
         js_ = """
             <script>

@@ -111,7 +111,7 @@ class OAuth1_0_Handler(AuthHandler):
         except Exception as e:
             raise QWeiboError(e)
 
-    def setToken(self, token, tokenSecret):
+    def setToken(self, token, tokenSecret=''):
         self.access_token = oauth.OAuthToken(token, tokenSecret)
 
 
@@ -122,7 +122,7 @@ class OAuth2_0_Handler(AuthHandler):
     AUTH_TYPE = "OAuth2.0"
 
     def __init__(self, API_Key='', API_Secret='', callback='', wap=None, state=None, forcelogin=None):
-        self.callback = callback or TWEIBO_CALLBACK_URL
+        self.callback = callback or TWEIBO_CALLBACK_URL 
         self._api_secret = API_Secret or TWEIBO_APP_SECRET 
         self._api_key = API_Key or TWEIBO_APP_KEY 
 
@@ -217,7 +217,7 @@ class OAuth2_0_Handler(AuthHandler):
 
         return response_args
 
-    def set_token(self, openid, access_token, refresh_token):
+    def set_token(self,access_token, openid='', refresh_token=''):
         self.refresh_token = refresh_token
         self.access_token = access_token
         self.openid = openid

@@ -3,11 +3,13 @@ $("#btn_submit").click(function(){
     $(".access").each(function(){
         var access_token = $(this).attr("access_token");
         var code = $(this).attr("code");
+        var open_id = $(this).attr("open_id");
         var expires_in = $(this).attr("expires_in");
         var obj = new Object();
         obj.access_token = access_token;
         obj.code = code;
         obj.expires_in = expires_in; 
+        obj.open_id = open_id
         obj_arr.push(obj);
     });
 
@@ -30,5 +32,6 @@ $(".access").each(function(){
 
 if(access_count == 0 && $(".gray").length> 0){
     $("#txt").attr("disabled", "disabled");
-    $(".msg").html("请先 <a href='/setting'>设置</a> 授权后再发状态！");
+    $("#btn_submit").attr("disabled", "disabled");
+    $(".msg").html("请先 <a href='/setting'>设置授权</a> 后再发状态！");
 }

@@ -29,20 +29,21 @@ class User(Base):
 
     @classmethod
     def update_access_token(cls, uid, sns_code, access_token,
-                            expires_time, expires_in):
+                            expires_time, expires_in, open_id=''):
         uid = int(uid)
         where = "u_id = {uid} and sns_code = '{sns_code}'"
         where = where.format(uid=uid, sns_code=sns_code)
         querys = Access.select(where)
 
         if len(querys) == 0:
-            a = Access(uid, sns_code, access_token, expires_time, expires_in)
+            a = Access(uid, sns_code, access_token, expires_time, expires_in, open_id)
             a.insert()
         else:
             access = querys[0]
             access.access_token = access_token
             access.expires_time = expires_time
             access.expires_in = expires_in
+            access.open_id = open_id
 
             access.update()
         return querys
