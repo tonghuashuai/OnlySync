@@ -17,12 +17,12 @@ $("#btn_submit").click(function(){
 
     var json = JSON.stringify(obj_arr);
     $.post("/", {"data": json, "msg": msg}, function(){
-        
+        window.location.href = "/share?txt=" + msg;
     });
 });
 
 $("#login").click(function(){
-    window.location.href = "/login"
+    window.location.href = "/login";
 });
 
 access_count = 0
