@@ -27,9 +27,12 @@
         <div class="float-r label loc"><a href="javascript:void(0);" name="" id="btn_locate">定个位</a></div>
         <div class="clear"></div>
     </div>
-    <br>
     <div class="form-group talign-r">
+        <div class="label float-l upload"><img src="/static/img/img.png"/></div>
+        <input id="img" class="float-l" onchange="preview(this);" type='file'/>
+        <div id="pre_img" class="float-l"></div>
         <button type="button" class="btn btn-primary" id="btn_submit">确 定</button>
+        <div class="clear"></div>
     </div>
 % else:
     <div class="form-group talign-c">

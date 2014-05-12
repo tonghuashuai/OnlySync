@@ -68,3 +68,29 @@ ul .item img{
 .list-group-item{
     cursor: pointer;
 }
+
+input[type="file"]{
+    filter:alpha(opacity=0);
+    -moz-opacity:0;
+    -khtml-opacity: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 60px;
+    font-size: 12px;
+    line-height: 12px;
+    margin-left: -60px;
+    padding-top: 24px;
+}
+
+.upload{
+    width: 60px;
+}
+
+#pre_img{
+    margin-left: 5px;
+}
+
+#btn_submit{
+    height: 42px;
+    width: 150px;
+}

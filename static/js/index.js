@@ -100,3 +100,25 @@ $("#btn_locate").click(function(){
         $(this).attr("name", "");
     }
 });
+
+$("#btn_upload").click(function(){
+    var html = "<br><input type='submit'/>";
+    $.fancybox({
+        content: html
+    });
+});
+
+function preview(file)
+{
+    var prevDiv = $('#pre_img');
+    if (file.files && file.files[0]){
+        var reader = new FileReader();
+        reader.onload = function(evt){
+            prevDiv.html('<img style="height: 42px;" src="' + evt.target.result + '" />');
+        }  
+        reader.readAsDataURL(file.files[0]);
+    }
+    else{
+        prevDiv.html('<div class="img" style="height: 42px; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>');
+    }
+}
