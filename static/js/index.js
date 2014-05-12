@@ -38,7 +38,7 @@ if(access_count == 0 && $(".gray").length> 0){
 }
 
 function show_size(event, obj){
-    len = obj.val().length;
+    var len = obj.val().length;
     $("#size").text(len);
 
     if (len > 0){
@@ -47,3 +47,36 @@ function show_size(event, obj){
         $("#btn_submit").attr("disabled", "disabled");
     }
 }
+
+function getLocation(){
+    if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }else{
+        alert("不支持定位");
+    }
+}
+function showPosition(position)
+{
+    var lat = position.coords.latitude; 
+    var lng = position.coords.longitude;  
+    var url = "http://api.map.baidu.com/geocoder/v2/?ak=gQK596QPc93W9DGbrxRrqilA&callback=renderReverse&location=" + lat + "," + lng + "&output=json&pois=1";
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+    document.body.appendChild(script);
+}
+function renderReverse(response){
+    var html = "";
+    var i = 0;
+    var pois = response.result.pois;
+    for (i = 0; i < pois.length; i++){
+        html += pois[i].name + "<br>";
+    }
+    $.fancybox({
+        content: html
+    });
+}
+
+$("#btn_locate").click(function(){
+    getLocation();
+});

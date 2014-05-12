@@ -1,7 +1,21 @@
 <%inherit file="share_base.html"/>
+<%!
+    from options import NAME
+%>
+<%block name="title">${txt or NAME}</%block>
 <link rel="stylesheet" href="/static/css/index.css"/>
 <link rel="stylesheet" href="/static/css/share.css"/>
-${txt}
+<img width="12px" style="position: absolute;top:-1000px;" src="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/ico_loading1984f1.gif">
+<div class="header">
+    <div id="activity-name">${txt}</div>
+</div>
+<div id="page-content" class="page-content">
+    <div id="img-content">
+        <div class="media" id="media">
+            <img src=""> 
+        </div>
+    </div>
+</div>
 <div class="share_btns">
     <div class="jiathis_style_32x32">
         <a class="jiathis_button_qzone"></a>

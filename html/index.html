@@ -25,12 +25,17 @@
         % endif
         <div class="size"><span id="size">0</span> 字</div>
         <button type="button" class="btn btn-primary" id="btn_submit">确 定</button>
+        <button type="button" class="btn btn-primary" id="btn_locate">定 位</button>
+
     </div>
 % else:
     <div class="form-group talign-c">
         <button type="button" class="btn btn-primary btn-lg active" id="login">来一发</button>
     </div>
 % endif
+<div id="loc">
+    
+</div>
 <%block name="js">
     <script src="/static/js/index.js"></script>
 </%block>
