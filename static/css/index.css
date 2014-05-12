@@ -48,12 +48,23 @@ ul .item img{
 }
 
 .size{
+    float: right;
+    margin: -43px 0 0 0;
+}
+
+.label{
     background: #f3f3f3;
     border: 1px solid #ccc;
-    float: right;
+    color: gray;
     font-size: 12px;
     line-height: 12px;
-    color: gray;
-    margin: -43px 0 0 0;
     padding: 4px 8px 4px;
+}
+
+.loc a{
+    color: gray;
+}
+
+.list-group-item{
+    cursor: pointer;
 }

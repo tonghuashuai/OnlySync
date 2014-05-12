@@ -6,7 +6,7 @@
         <label for="memo" class="control-label"></label>
         <textarea id="txt" class="form-control" oninput="show_size(event, $(this));" onpropertychange="show_size(event, $(this));" rows="8" placeholder="来一发" maxlength="140"></textarea>
     </div>
-    <div class="for-grop talign-r">
+    <div class="form-group talign-r">
         % if querys:
             <ul>
                 % for obj in querys:
@@ -23,10 +23,13 @@
                 </li>
             </ul>
         % endif
-        <div class="size"><span id="size">0</span> 字</div>
+        <div class="size label"><span id="size">0</span> 字</div>
+        <div class="float-r label loc"><a href="javascript:void(0);" name="" id="btn_locate">定个位</a></div>
+        <div class="clear"></div>
+    </div>
+    <br>
+    <div class="form-group talign-r">
         <button type="button" class="btn btn-primary" id="btn_submit">确 定</button>
-        <button type="button" class="btn btn-primary" id="btn_locate">定 位</button>
-
     </div>
 % else:
     <div class="form-group talign-c">

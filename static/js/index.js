@@ -66,17 +66,37 @@ function showPosition(position)
     document.body.appendChild(script);
 }
 function renderReverse(response){
-    var html = "";
+    var html = "<div class='list-group'>";
     var i = 0;
     var pois = response.result.pois;
     for (i = 0; i < pois.length; i++){
-        html += pois[i].name + "<br>";
+        html +=  "<a href='javascript: void(0);' class='list-group-item'>" + pois[i].name + "</a>";
     }
+    html += "</div>";
     $.fancybox({
-        content: html
+        content: html,
+        afterShow:function(){
+            $(".list-group-item").click(function(){
+                var name = $(this).text();
+                var short_name = name;
+                if (name.length > 10){
+                    short_name = name.substring(0, 10) + " ...";
+                }
+                $("#btn_locate").text(short_name); 
+                $("#btn_locate").attr("name", name); 
+                $.fancybox.close();
+            });
+        }
     });
 }
 
 $("#btn_locate").click(function(){
-    getLocation();
+    var name = $(this).attr("name");
+    if (name == ""){
+        $(this).text("正在定位 ...");
+        getLocation();
+    }else{
+        $(this).text("定个位");
+        $(this).attr("name", "");
+    }
 });
