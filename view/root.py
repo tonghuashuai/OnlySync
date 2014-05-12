@@ -23,9 +23,11 @@ class IndexHandler(BaseHandler):
         self.render(querys=querys)
 
     def post(self):
-        data = self.get_argument("data")
-        msg = self.get_argument("msg")
-        objs = json.loads(data)
+        msg = self.get_argument("txt")
+        loc = self.get_argument("txt_loc")
+        access_info = self.get_argument("access_info")
+
+        objs = json.loads(access_info)
         Message.send(objs, msg)
 
         self.finish({})

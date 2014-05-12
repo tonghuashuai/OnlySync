@@ -1,24 +1,29 @@
 $("#btn_submit").click(function(){
-    var obj_arr = new Array();
-    $(".access").each(function(){
-        var access_token = $(this).attr("access_token");
-        var code = $(this).attr("code");
-        var open_id = $(this).attr("open_id");
-        var expires_in = $(this).attr("expires_in");
-        var obj = new Object();
-        obj.access_token = access_token;
-        obj.code = code;
-        obj.expires_in = expires_in; 
-        obj.open_id = open_id
-        obj_arr.push(obj);
-    });
+    img_name = $("#img").val();
+    ext_name = img_name.substring(img_name.lastIndexOf(".") + 1, img_name.length);
+    var exts = new Array("jpg", "gif", "png", "jpeg", "bmp");
 
-    var msg = $("#txt").val();
+    if ($.inArray(ext_name, exts) > 0){
+        var obj_arr = new Array();
+        $(".access").each(function(){
+            var access_token = $(this).attr("access_token");
+            var code = $(this).attr("code");
+            var open_id = $(this).attr("open_id");
+            var expires_in = $(this).attr("expires_in");
+            var obj = new Object();
+            obj.access_token = access_token;
+            obj.code = code;
+            obj.expires_in = expires_in; 
+            obj.open_id = open_id
+            obj_arr.push(obj);
+        });
+        var access_info = JSON.stringify(obj_arr);
+        $("#access_info").val(access_info);
 
-    var json = JSON.stringify(obj_arr);
-    $.post("/", {"data": json, "msg": msg}, function(){
-        window.location.href = "/share?txt=" + msg;
-    });
+        $("#form").submit();
+    }else{
+        return false;
+    }
 });
 
 $("#login").click(function(){
@@ -83,7 +88,7 @@ function renderReverse(response){
                     short_name = name.substring(0, 10) + " ...";
                 }
                 $("#btn_locate").text(short_name); 
-                $("#btn_locate").attr("name", name); 
+                $("#txt_loc").val(name);
                 $.fancybox.close();
             });
         }
@@ -91,13 +96,13 @@ function renderReverse(response){
 }
 
 $("#btn_locate").click(function(){
-    var name = $(this).attr("name");
+    var name = $("#txt_loc").val();
     if (name == ""){
         $(this).text("正在定位 ...");
         getLocation();
     }else{
         $(this).text("定个位");
-        $(this).attr("name", "");
+        $("#txt_loc").val("");
     }
 });
 

@@ -12,6 +12,7 @@ from misc.config import *
 class Message(object):
     @classmethod
     def send(cls, access_info_list, msg):
+        return False
         client = None
         if access_info_list:
             for obj in access_info_list:

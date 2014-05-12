@@ -1,39 +1,43 @@
 <%inherit file="base.html"/>
 <link rel="stylesheet" href="/static/css/index.css"/>
 % if current_user:
-    <div class="form-group">
-        <div class="msg"></div>
-        <label for="memo" class="control-label"></label>
-        <textarea id="txt" class="form-control" oninput="show_size(event, $(this));" onpropertychange="show_size(event, $(this));" rows="8" placeholder="来一发" maxlength="140"></textarea>
-    </div>
-    <div class="form-group talign-r">
-        % if querys:
-            <ul>
-                % for obj in querys:
+    <form method="post" id="form" action="/" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="msg"></div>
+            <label for="memo" class="control-label"></label>
+            <textarea id="txt" name="txt" class="form-control" oninput="show_size(event, $(this));" onpropertychange="show_size(event, $(this));" rows="8" placeholder="来一发" maxlength="140"></textarea>
+        </div>
+        <div class="form-group talign-r">
+            % if querys:
+                <ul>
+                    % for obj in querys:
+                        <li class="item">
+                            % if obj.get('access_token'):
+                                <a href="javascript:void(0);" title="${obj.get('name')}" class="access" open_id="${obj.get('open_id')}" expires_in="${obj.get('expires_in')}" code="${obj.get('code')}" access_token="${obj.get('access_token')}"/><img alt="${obj.get('name')}" src="${obj.get('icon')}"/></a>
+                            % else:
+                                <a href="javascript:void(0);" title="${obj.get('name')} 未授权"/><img alt="${obj.get('name')} 未授权" class="gray" src="${obj.get('icon')}"/></a>
+                            % endif
+                        </li>
+                    % endfor
                     <li class="item">
-                        % if obj.get('access_token'):
-                            <a href="javascript:void(0);" title="${obj.get('name')}" class="access" open_id="${obj.get('open_id')}" expires_in="${obj.get('expires_in')}" code="${obj.get('code')}" access_token="${obj.get('access_token')}"/><img alt="${obj.get('name')}" src="${obj.get('icon')}"/></a>
-                        % else:
-                            <a href="javascript:void(0);" title="${obj.get('name')} 未授权"/><img alt="${obj.get('name')} 未授权" class="gray" src="${obj.get('icon')}"/></a>
-                        % endif
+                        <a href="/setting" title="设置授权"/><img alt="设置授权" src="/static/img/cog.png"/></a>
                     </li>
-                % endfor
-                <li class="item">
-                    <a href="/setting" title="设置授权"/><img alt="设置授权" src="/static/img/cog.png"/></a>
-                </li>
-            </ul>
-        % endif
-        <div class="size label"><span id="size">0</span> 字</div>
-        <div class="float-r label loc"><a href="javascript:void(0);" name="" id="btn_locate">定个位</a></div>
-        <div class="clear"></div>
-    </div>
-    <div class="form-group talign-r">
-        <div class="label float-l upload"><img src="/static/img/img.png"/></div>
-        <input id="img" class="float-l" onchange="preview(this);" type='file'/>
-        <div id="pre_img" class="float-l"></div>
-        <button type="button" class="btn btn-primary" id="btn_submit">确 定</button>
-        <div class="clear"></div>
-    </div>
+                </ul>
+            % endif
+            <div class="size label"><span id="size">0</span> 字</div>
+            <div class="float-r label loc"><a href="javascript:void(0);" name="" id="btn_locate">定个位</a></div>
+            <input name="txt_loc" id="txt_loc" type="hidden" value=""/>
+            <div class="clear"></div>
+        </div>
+        <div class="form-group talign-r">
+            <div class="label float-l upload"><img src="/static/img/img.png"/></div>
+            <input id="img" name="img" class="float-l" onchange="preview(this);" type='file'/>
+            <div id="pre_img" class="float-l"></div>
+            <button type="button" class="btn btn-primary" id="btn_submit">确 定</button>
+            <div class="clear"></div>
+        </div>
+        <input name="access_info" id="access_info" type="hidden"/>
+    </form>
 % else:
     <div class="form-group talign-c">
         <button type="button" class="btn btn-primary btn-lg active" id="login">来一发</button>
