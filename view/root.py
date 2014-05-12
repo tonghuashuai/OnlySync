@@ -26,9 +26,11 @@ class IndexHandler(BaseHandler):
     def post(self):
         msg = self.get_argument("txt")
         loc = self.get_argument("txt_loc")
+        if loc:
+            msg = "我会告诉你我在 {0} 吗？  {1}".format(loc, msg)
         access_info = self.get_argument("access_info")
 
-        img = None
+        tmp_file = None
         if len(self.request.files) > 0:
             tmp_file = tempfile.NamedTemporaryFile(delete=True)
             tmp_file.write(self.request.files["img"][0]["body"])

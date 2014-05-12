@@ -20,7 +20,11 @@ class Message(object):
                     expires_in = obj.get("expires_in")
                     client = SinaClient()
                     client.set_access_token(access_token, expires_in)
-                    client.statuses.upload.post(status=msg, pic=img)
+                    print img
+                    if img:
+                        client.statuses.upload.post(status=msg, pic=img)
+                    else:
+                        client.statuses.update.post(status=msg)
                 elif obj.get("code") == SNSCode.RENREN:
                     client = RenrenClient() 
                     client.set_access_token(access_token)
