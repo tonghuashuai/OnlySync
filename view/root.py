@@ -12,6 +12,7 @@ from misc.tweibo import API, JSONParser
 from misc.tweibo import OAuth2_0_Handler as AuthHandler
 from misc.config import *
 from misc.message import Message
+import tempfile
 
 from misc.python_misc.datetime_misc import *
 
@@ -27,8 +28,14 @@ class IndexHandler(BaseHandler):
         loc = self.get_argument("txt_loc")
         access_info = self.get_argument("access_info")
 
+        img = None
+        if len(self.request.files) > 0:
+            tmp_file = tempfile.NamedTemporaryFile(delete=True)
+            tmp_file.write(self.request.files["img"][0]["body"])
+            tmp_file.seek(0)
+
         objs = json.loads(access_info)
-        Message.send(objs, msg)
+        Message.send(objs, msg, tmp_file)
 
         self.finish({})
 

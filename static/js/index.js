@@ -1,9 +1,9 @@
 $("#btn_submit").click(function(){
-    img_name = $("#img").val();
-    ext_name = img_name.substring(img_name.lastIndexOf(".") + 1, img_name.length);
+    var img_name = $("#img").val();
+    var ext_name = img_name.substring(img_name.lastIndexOf(".") + 1, img_name.length);
     var exts = new Array("jpg", "gif", "png", "jpeg", "bmp");
 
-    if ($.inArray(ext_name, exts) > 0){
+    if ($.inArray(ext_name, exts) > 0 || img_name == ""){
         var obj_arr = new Array();
         $(".access").each(function(){
             var access_token = $(this).attr("access_token");

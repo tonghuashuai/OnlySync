@@ -11,8 +11,7 @@ from misc.config import *
 
 class Message(object):
     @classmethod
-    def send(cls, access_info_list, msg):
-        return False
+    def send(cls, access_info_list, msg, img=None):
         client = None
         if access_info_list:
             for obj in access_info_list:
@@ -21,7 +20,7 @@ class Message(object):
                     expires_in = obj.get("expires_in")
                     client = SinaClient()
                     client.set_access_token(access_token, expires_in)
-                    client.statuses.update.post(status=msg)
+                    client.statuses.upload.post(status=msg, pic=img)
                 elif obj.get("code") == SNSCode.RENREN:
                     client = RenrenClient() 
                     client.set_access_token(access_token)
@@ -36,6 +35,9 @@ class Message(object):
                     auth.set_token(access_token, open_id)
                     api = API(auth, parser=JSONParser())
                     api.tweet.add(msg)
+
+                if img:
+                    img.close()
 
         # print client.statuses.user_timeline.get()
         # print client.statuses.update.post(status=u'测试OAuth 2.0发微博')
