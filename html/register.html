@@ -1,0 +1,41 @@
+<%inherit file="base.html"/> <%block name="css">
+<link rel="stylesheet" href="/static/css/login.css">
+</%block>
+
+<%
+    from misc.config import SEX_EN, SEX_CN 
+%>
+<div class="msg"></div>
+<div class="login_container">
+    <h3>注册</h3>
+    <ul>
+        <li>
+            <input placeholder="邮箱" type="text" name="email" id="email"/>
+        </li>
+        <li>
+            <input placeholder="密码" type="password" name="pwd" id="pwd"/>
+        </li>
+        <li>
+            <input placeholder="用户名" type="text" name="name" id="name"/>
+        </li>
+        <li>
+            <!-- Small button group -->
+            <div class="btn-group">
+              <button id="sex_select" class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                  <span id="sex_value">性别</span><span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                  <li><a href="javascript: void(0);" class="sex" code="${SEX_EN.get('MALE')}">${SEX_CN.get(SEX_EN.get('MALE'))}</a></li>
+                  <li><a href="javascript: void(0);" class="sex" code="${SEX_EN.get('FAMALE')}">${SEX_CN.get(SEX_EN.get('FAMALE'))}</a></li>
+              </ul>
+              <input type="hidden" id="sex" value="${SEX_EN.get('NOT_SURE')}">
+            </div>
+        </li>
+        <li>
+            <button type="button" class="btn btn-primary btn-sm" id="btn_register" disabled>注册</button>
+        </li>
+    </ul>
+</div>
+<%block name="js">
+    <script type="text/javascript" src="/static/js/register.js"></script>
+</%block>
