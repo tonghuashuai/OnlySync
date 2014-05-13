@@ -92,5 +92,5 @@ input[type="file"]{
 
 #btn_submit{
     height: 42px;
-    width: 150px;
+    width: 100%;
 }

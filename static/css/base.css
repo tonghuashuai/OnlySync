@@ -152,8 +152,7 @@ ul li{
 }
 
 .footer{
-    position:absolute;
-    bottom:10px; 
+    padding-bottom: 15px; 
     text-align: center;
     width: 100%
 }
