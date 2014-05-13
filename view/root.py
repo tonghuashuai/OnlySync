@@ -13,15 +13,19 @@ from misc.tweibo import OAuth2_0_Handler as AuthHandler
 from misc.config import *
 from misc.message import Message
 import tempfile
+from misc.config import SELECT_ACCESS_INFO 
 
 from misc.python_misc.datetime_misc import *
 
 
 class IndexHandler(BaseHandler):
     def get(self):
-        sql = "select SNS.name, SNS.icon, SNS.code, Access.access_token, Access.expires_time, Access.expires_in, Access.open_id, Access.u_id from SNS left join Access on SNS.code = Access.sns_code where u_id = 1 or u_id is null;"
-        querys = dba.query(sql)
-        self.render(querys=querys)
+        querys = None
+        if self.current_user:
+            sql = SELECT_ACCESS_INFO .format(self.current_user.id)
+            querys = dba.query(sql)
+        msg = self.get_argument("msg", "");
+        self.render(querys=querys, msg=msg)
 
     def post(self):
         msg = self.get_argument("txt")
@@ -39,7 +43,7 @@ class IndexHandler(BaseHandler):
         objs = json.loads(access_info)
         Message.send(objs, msg, tmp_file)
 
-        self.finish({})
+        self.redirect("/?msg=发送成功")
 
 class AboutHandler(BaseHandler):
     def get(self):

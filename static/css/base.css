@@ -143,8 +143,12 @@ ul li{
 }
 
 .msg{
+    background: #dff0d8;
+    border-radius: 4px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
-    color: red;
+    display: none;
 }
 
 .msg a{

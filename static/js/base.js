@@ -20,3 +20,17 @@ function close_loading(){
     $("#loading").html('');
 }
 $(".navbar-nav>.active").addClass("float-r");
+
+$(document).ready(
+    function(){
+        if($(".msg").text() != ""){
+            $(".msg").fadeIn();
+        }
+        window.setTimeout(function(){
+            if ($(".msg").attr("is_fade") != "false"){
+                $(".msg").fadeOut();
+            }
+        },3000); 
+    }
+
+);

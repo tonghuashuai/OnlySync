@@ -3,7 +3,7 @@
 % if current_user:
     <form method="post" id="form" action="/" enctype="multipart/form-data">
         <div class="form-group">
-            <div class="msg"></div>
+            <div class="msg" is_fade="true">${msg}</div>
             <label for="memo" class="control-label"></label>
             <textarea id="txt" name="txt" class="form-control" oninput="show_size(event, $(this));" onpropertychange="show_size(event, $(this));" rows="8" placeholder="来一发" maxlength="140"></textarea>
         </div>

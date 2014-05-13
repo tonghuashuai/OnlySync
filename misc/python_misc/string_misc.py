@@ -2,7 +2,7 @@
 #coding:utf-8
 
 import re
-
+import hashlib
 
 def extract(s, start, end, pre_suf_fix=False):
     p = '{start}.*?{end}'.format(start=start, end=end)
@@ -15,3 +15,9 @@ def extract(s, start, end, pre_suf_fix=False):
             s_ = s_.replace(start, '').replace(end, '')
 
     return s_
+
+
+def md5(s):
+    m = hashlib.md5()   
+    m.update(s)
+    return m.hexdigest()

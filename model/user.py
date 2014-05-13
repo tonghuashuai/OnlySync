@@ -4,6 +4,7 @@
 import json
 from misc.config import SEX_EN 
 from misc.python_misc.log_misc import Log
+from misc.python_misc.string_misc import md5
 from access import Access
 from base import Base
 
@@ -20,6 +21,7 @@ class User(Base):
     @classmethod
     def login(cls, email, pwd):
         user = None
+        pwd = md5(pwd)
         where = "email = '{email}' and p = '{p}'".format(email=email, p=pwd)
         users = User.select(where)
         if users:

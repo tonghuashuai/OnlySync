@@ -8,6 +8,7 @@ import tornado.web
 from view._base import BaseHandler as _BaseHanlder
 from model.access import Access
 from misc import dba
+from misc.config import SELECT_ACCESS_INFO 
 
 
 class BaseHandler(_BaseHanlder):
@@ -23,7 +24,9 @@ class NewHandler(BaseHandler):
 class SettingHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self):
-        sql = "select SNS.name, SNS.icon, SNS.code, Access.access_token, Access.expires_time, Access.u_id from SNS left join Access on SNS.code = Access.sns_code where u_id = 1 or u_id is null;"
+        uid = self.current_user.id
+        sql = SELECT_ACCESS_INFO .format(self.current_user.id)
+        print sql
         querys = dba.query(sql)
 
         self.render(querys=querys)

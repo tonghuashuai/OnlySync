@@ -1,9 +1,10 @@
 $("#btn_submit").click(function(){
+    var txt = $("#txt").val(); 
     var img_name = $("#img").val();
     var ext_name = img_name.substring(img_name.lastIndexOf(".") + 1, img_name.length);
     var exts = new Array("jpg", "gif", "png", "jpeg", "bmp");
 
-    if ($.inArray(ext_name, exts) > 0 || img_name == ""){
+    if (txt != "" || $.inArray(ext_name, exts) > 0 || img_name != ""){
         var obj_arr = new Array();
         $(".access").each(function(){
             var access_token = $(this).attr("access_token");
@@ -38,6 +39,7 @@ $(".access").each(function(){
 $("#btn_submit").attr("disabled", "disabled");
 
 if(access_count == 0 && $(".gray").length> 0){
+    $(".msg").attr("is_fade", false);
     $("#txt").attr("disabled", "disabled");
     $(".msg").html("请先 <a href='/setting'>设置授权</a> 后再发状态！");
 }
