@@ -5,6 +5,7 @@ from misc.config import *
 from misc import dba
 from misc.python_misc.log_misc import Log
 import json
+import _mysql_exceptions
 
 log = Log()
 
@@ -78,7 +79,6 @@ class Base(object):
             vals = ""
 
             o_dict = self.get_dict()
-            print o_dict
             for k, v in o_dict.iteritems():
                 if k != "id":
                     cols += k + ","
@@ -95,6 +95,9 @@ class Base(object):
             vals = vals[:-1]
             sql = sql.format(tbl_name=tbl_name, cols=cols, vals=vals)
             dba.execute(sql)
+        except _mysql_exceptions.IntegrityError as e1:
+            print e1
+            raise e1
         except Exception as e:
             log.error(e)
 

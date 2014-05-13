@@ -41,7 +41,7 @@ ul{
         width: 600px; 
     }
 }
-.login_container ul li{
+.login_container li{
     margin-bottom: 15px;
 }
 
@@ -63,4 +63,16 @@ ul{
     border-bottom: 2px solid #d2322d;
     padding: 0 0 10px 5px;
     margin-bottom: 20px;
+}
+
+.dropdown-menu li{
+    margin-bottom: 0px;
+}
+
+.dropdown-menu{
+    min-width: 50px;
+}
+
+#sex_select{
+    min-width: 50px;
 }

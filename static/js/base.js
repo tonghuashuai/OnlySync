@@ -21,16 +21,27 @@ function close_loading(){
 }
 $(".navbar-nav>.active").addClass("float-r");
 
+function hide_alert(){
+    if ($(".msg").attr("is_fade") != "false"){
+        $(".msg").fadeOut();
+    }
+}
+
 $(document).ready(
     function(){
         if($(".msg").text() != ""){
             $(".msg").fadeIn();
         }
         window.setTimeout(function(){
-            if ($(".msg").attr("is_fade") != "false"){
-                $(".msg").fadeOut();
-            }
+            hide_alert();
         },3000); 
     }
-
 );
+
+function alert_msg(msg){
+    $(".msg").text(msg);
+    $(".msg").fadeIn();
+    window.setTimeout(function(){
+        hide_alert();
+    },3000); 
+}

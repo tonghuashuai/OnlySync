@@ -26,16 +26,22 @@ def get_cursor():
 
 def query(sql):
     cursor, conn = get_cursor()
-    count = cursor.execute(sql)
-    querys = cursor.fetchall()
-    cursor.close()
-    conn.close()
+    try:
+        count = cursor.execute(sql)
+        querys = cursor.fetchall()
+    except Exception as d:
+        cursor.close()
+        conn.close()
+        raise d 
 
     return querys
 
     
 def execute(sql):
     cursor, conn = get_cursor()
-    cursor.execute(sql)
-    cursor.close()
-    conn.close()
+    try:
+        cursor.execute(sql)
+    except Exception as d:
+        cursor.close()
+        conn.close()
+        raise d 

@@ -11,10 +11,11 @@ from misc.douban_client import DoubanClient
 from misc.tweibo import API, JSONParser
 from misc.tweibo import OAuth2_0_Handler as AuthHandler
 from misc.config import *
+from misc.python_misc.string_misc import md5
 from misc.message import Message
 import tempfile
 from misc.config import SELECT_ACCESS_INFO 
-
+import _mysql_exceptions
 from misc.python_misc.datetime_misc import *
 
 
@@ -47,8 +48,27 @@ class IndexHandler(BaseHandler):
 
 class AboutHandler(BaseHandler):
     def get(self):
-        self.render(body="about")
+        self.render()
 
+
+class RegisterHandler(BaseHandler):
+    def get(self):
+        self.render()
+
+    def post(self):
+        msg = "ok"
+        email = self.get_argument("email")
+        name = self.get_argument("name")
+        pwd = self.get_argument("pwd")
+        sex = self.get_argument("sex")
+
+        user = User(name,md5(pwd), sex, email)
+        try:
+            user.insert()
+        except _mysql_exceptions.IntegrityError as e:
+            msg = "邮箱已注册"
+        
+        self.finish({'msg': msg})
 
 class LoginHandler(BaseHandler):
     def get(self):

@@ -13,6 +13,7 @@ urls = [
     (r"/", IndexHandler),
     (r"/about", AboutHandler),
     (r"/login", LoginHandler),
+    (r"/register", RegisterHandler),
     (r"/logout", LogoutHandler),
     (r"/new", NewHandler),
     (r"/setting", SettingHandler),

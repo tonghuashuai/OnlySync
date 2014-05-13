@@ -46,11 +46,14 @@
                                 <a href="/setting">设置</a>
                             </li>
                         % endif
-                        <li class="nav_li float-r">
-                            % if not current_user:
+                        % if not current_user:
+                            <li class="nav_li float-r">
+                                <a href="/register">注册</a>
+                            </li>
+                            <li class="nav_li float-r">
                                 <a href="/login">登录</a>
-                            % endif
-                        </li>
+                            </li>
+                        % endif
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
