@@ -13,7 +13,6 @@ from misc.tweibo import OAuth2_0_Handler as AuthHandler
 from misc.config import *
 from misc.python_misc.string_misc import md5
 from misc.message import Message
-import tempfile
 from misc.config import SELECT_ACCESS_INFO 
 import _mysql_exceptions
 from misc.python_misc.datetime_misc import *
@@ -35,14 +34,8 @@ class IndexHandler(BaseHandler):
             msg = "我会告诉你我在 {0} 吗？  {1}".format(loc, msg)
         access_info = self.get_argument("access_info")
 
-        tmp_file = None
-        if len(self.request.files) > 0:
-            tmp_file = tempfile.NamedTemporaryFile(delete=True)
-            tmp_file.write(self.request.files["img"][0]["body"])
-            tmp_file.seek(0)
-
         objs = json.loads(access_info)
-        Message.send(objs, msg, tmp_file)
+        Message.send(objs, msg, self.request.files)
 
         self.redirect("/?msg=发送成功")
 

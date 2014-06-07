@@ -26,7 +26,6 @@ class SettingHandler(BaseHandler):
     def get(self):
         uid = self.current_user.id
         sql = SELECT_ACCESS_INFO .format(self.current_user.id)
-        print sql
         querys = dba.query(sql)
 
         self.render(querys=querys)
