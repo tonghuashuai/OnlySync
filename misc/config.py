@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding:utf-8
+# coding:utf-8
 
 SEX_EN = {
     "MALE": 1,
@@ -32,7 +32,7 @@ DOUBAN_APP_SECRET = "b9dfa5c1a62eb874"
 DOUBAN_REDIRECT_URI = "{0}/auth/douban_callback".format(HOST)
 DOUBAN_SCOPE = 'douban_basic_common,shuo_basic_r,shuo_basic_w'
 
-#tencent weibo
+# tencent weibo
 TWEIBO_APP_KEY = "801504862"
 TWEIBO_APP_SECRET = "a24f8a49a949680882ab60c3c30b75c3"
 TWEIBO_CALLBACK_URL = "{0}/auth/tweibo_callback".format(HOST)
@@ -41,7 +41,7 @@ TWEIBO_CALLBACK_URL = "{0}/auth/tweibo_callback".format(HOST)
 MYSQL_HOST = "127.0.0.1"
 MYSQL_DB = "onlysync"
 MYSQL_USR = "root"
-MYSQL_PWD = "admin"
+MYSQL_PWD = "OhMyGod20!@"
 
 SELECT_ALL = "select * from {tbl_name} where 1 = 1 {where};"
 UPDATE = "update {tbl_name} set {k_v} where {where}"

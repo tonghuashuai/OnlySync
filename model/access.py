@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding:utf-8
+# coding:utf-8
 
 from base import Base
 
@@ -12,4 +12,4 @@ class Access(Base):
         self.access_token = access_token
         self.expires_time = expires_time
         self.expires_in = expires_in
-        self.open_id = open_id 
+        self.open_id = open_id

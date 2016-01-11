@@ -1,16 +1,18 @@
 #!/usr/bin/env python
-#coding:utf-8
+# coding:utf-8
 
-from misc.config import *
+
+import json
+
+from misc.config import *  # noqa
 from misc import dba
 from misc.python_misc.log_misc import Log
-import json
 import _mysql_exceptions
 
 log = Log()
 
+
 class Base(object):
-    
     @classmethod
     def get(cls, o_id):
         model = None
@@ -24,7 +26,7 @@ class Base(object):
         except Exception as e:
             log.error(e)
 
-        return model 
+        return model
 
     def get_dict(self):
         return self.__dict__
@@ -38,7 +40,7 @@ class Base(object):
         for k, v in dic.iteritems():
             setattr(model, k, v)
 
-        return model 
+        return model
 
     @classmethod
     def select(cls, where=""):
@@ -48,7 +50,7 @@ class Base(object):
             tbl_name = cls.__name__
             sql = SELECT_ALL.format(tbl_name=tbl_name, where=where)
             models = dba.query(sql)
-            
+
             for dic in models:
                 model = cls.get_from_dict(dic)
                 model_list.append(model)
@@ -89,7 +91,7 @@ class Base(object):
                     elif f_type == "NoneType":
                         vals += "NULL,"
                     else:
-                        vals += "'" +  v + "',"
+                        vals += "'" + v + "',"
 
             cols = cols[:-1]
             vals = vals[:-1]
@@ -118,7 +120,7 @@ class Base(object):
                     elif f_type == "NoneType":
                         val = "NULL,"
                     else:
-                        val = "'" +  v + "',"
+                        val = "'" + v + "',"
 
                     sets += col + val
             sets = sets[:-1]
